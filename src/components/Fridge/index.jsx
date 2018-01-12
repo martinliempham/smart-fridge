@@ -22,7 +22,6 @@ const items = [
 ];
 
 export default class Fridge extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -35,46 +34,51 @@ export default class Fridge extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      mostRecentItemId: this.state.items[this.state.items.length - 1].id
-    }, () => console.log(`Most recent item id: ${this.state.mostRecentItemId}`));
+    this.setState(
+      {
+        mostRecentItemId: this.state.items[this.state.items.length - 1].id
+      },
+      () => console.log(`Most recent item id: ${this.state.mostRecentItemId}`)
+    );
   }
-  
-  render(){
+
+  render() {
     return (
-      <div className='fridge'>
-        <h1>
-          SMART FRIDGE
-        </h1>
-        <Items 
-          items={this.state.items}
-          deleteItem={this.deleteItem}
-        />
-        <AddItemForm 
+      <div className="fridge">
+        <h1>SMART FRIDGE</h1>
+        <Items items={this.state.items} deleteItem={this.deleteItem} />
+        <AddItemForm
           addItem={this.addItem}
           mostRecentItemId={this.state.mostRecentItemId}
         />
       </div>
-    )
+    );
   }
 
-  deleteItem (itemToDeleteId) {
+  deleteItem(itemToDeleteId) {
     let items = [...this.state.items];
     let itemToDeleteIndex;
 
     // find index of item to be removed in the original list
     items.forEach((item, index) => {
-      if(item.id === itemToDeleteId) {
+      if (item.id === itemToDeleteId) {
         itemToDeleteIndex = index;
       }
     });
 
     items.splice(itemToDeleteIndex, 1);
 
-    this.setState({
-      items
-    }, () => console.log(`Successfully updated items in fridge: ${JSON.stringify(this.state.items)}`))
-
+    this.setState(
+      {
+        items
+      },
+      () =>
+        console.log(
+          `Successfully updated items in fridge: ${JSON.stringify(
+            this.state.items
+          )}`
+        )
+    );
   }
 
   addItem(item) {
@@ -82,8 +86,16 @@ export default class Fridge extends Component {
 
     items.push(item);
 
-    this.setState({
-      items
-    }, () => console.log(`Successfully updated items in fridge: ${JSON.stringify(this.state.items)}`))
+    this.setState(
+      {
+        items
+      },
+      () =>
+        console.log(
+          `Successfully updated items in fridge: ${JSON.stringify(
+            this.state.items
+          )}`
+        )
+    );
   }
 }
